@@ -1,150 +1,124 @@
-# Holidays API
+# **Holidays API Project**
 
-## 📌 Overview
-The **Holidays API** is a Django REST Framework (DRF) based backend application that provides holiday data based on country and year. It fetches holiday details and allows optional searching by holiday name.
+This project provides a **Django REST API** for fetching holiday data and a **React frontend** for searching and displaying holidays.
 
-## 🚀 Setup Instructions
-
-### **1️⃣ Install Python 3.11**
-Ensure you have **Python 3.11** installed. You can verify it using:
-```bash
-python --version
+## **Project Structure**  
 ```
-If not installed, download it from [Python Official Website](https://www.python.org/downloads/).
-
-### **2️⃣ Clone the Repository**
-```bash
-git clone https://github.com/alfyyakkov/Holidays.git
-cd backend
-```
-
-### **3️⃣ Create a Virtual Environment (Recommended)**
-```bash
-python -m venv venv
-source venv/bin/activate  # For macOS/Linux
-venv\Scripts\activate    # For Windows
-```
-
-### **4️⃣ Install Dependencies**
-Run the following command to install all required packages:
-```bash
-pip install -r requirements.txt
-```
-
-### **5️⃣ Run Migrations**
-```bash
-python manage.py migrate
-```
-
-### **6️⃣ Start the Server**
-```bash
-python manage.py runserver
-```
-The API will be accessible at:
-```
-http://127.0.0.1:8000/
+/Holidays
+│── /backend   # Django Backend
+│── /frontend  # React Frontend
 ```
 
 ---
-## 🌍 API Endpoints
 
-### **1️⃣ Get Available Countries**
-- **Endpoint:** `/api/countries/`
-- **Method:** `GET`
-- **Response Example:**
-```json
-{
-    "meta": {
-        "code": 200
-    },
-    "response": {
-        "url": "https://calendarific.com/supported-countries",
-        "countries": [
-            {
-                "country_name": "Afghanistan",
-                "iso-3166": "AF",
-                "total_holidays": 24,
-                "supported_languages": 2,
-                "uuid": "f0357a3f154bc2ffe2bff55055457068",
-                "flag_unicode": "🇦🇫"
-            }
-        ]
-  }
-}
-```
+## **Backend Setup (Django API)**
 
-### **2️⃣ Get Holidays**
-- **Endpoint:** `/api/holidays/`
-- **Method:** `GET`
-- **Accepted Parameters:**
-  - `year` (int, **required**) → Year for which holidays are needed.
-  - `country` (ISO code, **required**) → Country code (e.g., US, IN, FR).
-  - `search` (string, optional) → Search holidays by name.
+### **Prerequisites**
+- Python 3.11+
+- SQLite
 
-#### **Example Request:**
-```bash
-GET /api/holidays/?year=2024&country=US
-```
+### **Installation Steps**
 
-#### **Example Response:**
-```json
-{
-    "meta": {
-        "code": 200
-    },
-    "response": {
-        "holidays": [
-            {
-                "name": "Epiphany",
-                "description": "Epiphany is a Christian holiday celebrated globally on January 6 each year. It commemorates two events recorded in the Bible: the three wise men’s visit to baby Jesus; and Jesus’ baptism.",
-                "country": {
-                    "id": "ee",
-                    "name": "Estonia"
-                },
-                "date": {
-                    "iso": "2025-01-06",
-                    "datetime": {
-                        "year": 2025,
-                        "month": 1,
-                        "day": 6
-                    }
-                },
-                "type": [
-                    "Observance"
-                ],
-                "primary_type": "Observance",
-                "canonical_url": "https://calendarific.com/holiday/estonia/epiphany",
-                "urlid": "estonia/epiphany",
-                "locations": "All",
-                "states": "All"
-            }
-        ]
-    }
-}
-```
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/alfyyakkov/Holidays.git
+   cd Holidays/backend
+   ```
 
-#### **Example Request with Search Parameter:**
-```bash
-GET /api/holidays/?year=2024&country=US&search=Christmas
-```
+2. **Create and activate a virtual environment**  
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # For Mac/Linux
+   venv\Scripts\activate  # For Windows
+   ```
+
+3. **Install dependencies**  
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run migrations**  
+   ```bash
+   python manage.py migrate
+   ```
+
+5. **Start the Django server**  
+   ```bash
+   python manage.py runserver
+   ```
+
+### **API Endpoints**  
+- **`/api/countries`** - Get a list of supported countries.  
+- **`/api/holidays`** - Fetch holidays based on parameters.  
+
+**Accepted Parameters:**  
+| Parameter  | Type  | Required | Description |
+|------------|------|----------|-------------|
+| `year`     | int  | ✅ Yes | Year for holiday lookup |
+| `country`  | str  | ✅ Yes | ISO country code (e.g., US, IN) |
+| `search`   | str  | ❌ No  | Search holidays by name |
 
 ---
-## ⚙️ Environment Variables (.env)
-Create a `.env` file in the project root to store sensitive credentials. Example:
-```
-CALENDARIFIC_API_KEY="your-api-key"
-```
+
+## **Frontend Setup (React + Tailwind CSS)**
+
+### **Prerequisites**
+- Node.js (16+)
+- npm or yarn
+
+### **Frontend Requirements**
+- React 18+
+- Tailwind CSS
+- Axios for API requests
+- React Router for navigation
+
+### **Installation Steps**
+
+1. **Navigate to the frontend directory**  
+   ```bash
+   cd ../frontend/holidays-app
+   ```
+
+2. **Install dependencies**  
+   ```bash
+   npm install
+   ```
+
+3. **Start the frontend app**  
+   ```bash
+   npm start
+   ```
+
+### **Features**  
+✔ **Home Page:** Search form with country and year fields  
+✔ **Holiday List Page:** Displays holiday results based on search  
 
 ---
-## 🛠️ Technologies Used
-- **Python 3.11**
-- **Django**
-- **Django REST Framework (DRF)**
-- **SQLite (Database)**
-- ****
+
+## **Connecting Frontend & Backend**  
+
+- The frontend fetches data using `axios` from the Django backend.  
+- Update `api.js` in React with the correct backend URL:  
+  ```javascript
+  export const API_BASE_URL = "http://127.0.0.1:8000/api";
+  ```
 
 ---
-## ✨ Contributors
-- **Alfy KY**
 
+## **Project Status**  
+
+- ✅ **Backend Completed (Django API)**  
+- 🚧 **Frontend In Progress (React & Tailwind CSS)**  
+
+I am currently learning React and Tailwind CSS, so development is ongoing.  
+
+---
+
+### **Contributions & Feedback**  
+If you have any feedback or suggestions, feel free to reach out.  
+
+---
+
+### **License**  
+This project is open-source and available under the [MIT License](LICENSE).
 
