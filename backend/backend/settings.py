@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'holidays',
     'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -139,3 +141,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CALENDARIFIC_API_KEY = os.environ.get('CALENDARIFIC_API_KEY')
+
+CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins
