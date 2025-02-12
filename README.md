@@ -1,2 +1,2 @@
-# Calenderific-API
+# Holidays
 Test Project
